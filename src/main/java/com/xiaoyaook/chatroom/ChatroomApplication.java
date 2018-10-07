@@ -19,10 +19,6 @@ public class ChatroomApplication implements CommandLineRunner {
 
     @Autowired
     private WebSocketServer webSocketServer;
-    @Autowired
-    private UserInfoDao userInfoDao;
-    @Autowired
-    private GroupInfoDao groupDao;
 
     public static void main(String[] args) {
         SpringApplication.run(ChatroomApplication.class, args);
@@ -32,10 +28,6 @@ public class ChatroomApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         logger.info("启动Netty WebSocket服务器...");
         webSocketServer.build();
-        logger.info("加载用户数据...");
-        userInfoDao.loadUserInfo();
-        logger.info("加载用户交流群数据...");
-        groupDao.loadGroupInfo();
     }
 
     /**

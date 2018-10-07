@@ -37,7 +37,7 @@ public class ChatroomController {
     @RequestMapping(value = "/get_userinfo", method = RequestMethod.POST)
     @ResponseBody
     public ResponseJson getUserInfo(HttpSession session) {
-        Object userId = session.getAttribute(Constant.USER_TOKEN);
-        return userInfoService.getByUserId((String)userId);
+        Object username = session.getAttribute(Constant.USER_TOKEN);
+        return userInfoService.getByUsername((String) username);
     }
 }

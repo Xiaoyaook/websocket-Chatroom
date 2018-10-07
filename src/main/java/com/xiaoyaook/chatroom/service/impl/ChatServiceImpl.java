@@ -82,25 +82,25 @@ public class ChatServiceImpl implements ChatService {
                 sendMessage(userCtx.getValue(), responseJson);
             }
         }*/
-        GroupInfo groupInfo = groupDao.getByGroupId(toGroupId);
-        if (groupInfo == null) {
-            String responseJson = new ResponseJson().error("该群id不存在").toString();
-            sendMessage(ctx, responseJson);
-        } else {
-            String responseJson = new ResponseJson().success()
-                    .setData("fromUserId", fromUserId)
-                    .setData("content", content)
-                    .setData("toGroupId", toGroupId)
-                    .setData("type", ChatType.GROUP_SENDING)
-                    .toString();
-            groupInfo.getMembers().stream()
-                    .forEach(member -> {
-                        ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
-                        if (toCtx != null && !member.getUserId().equals(fromUserId)) {
-                            sendMessage(toCtx, responseJson);
-                        }
-                    });
-        }
+//        GroupInfo groupInfo = groupDao.getByGroupId(toGroupId);
+//        if (groupInfo == null) {
+//            String responseJson = new ResponseJson().error("该群id不存在").toString();
+//            sendMessage(ctx, responseJson);
+//        } else {
+//            String responseJson = new ResponseJson().success()
+//                    .setData("fromUserId", fromUserId)
+//                    .setData("content", content)
+//                    .setData("toGroupId", toGroupId)
+//                    .setData("type", ChatType.GROUP_SENDING)
+//                    .toString();
+//            groupInfo.getMembers().stream()
+//                    .forEach(member -> {
+//                        ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
+//                        if (toCtx != null && !member.getUserId().equals(fromUserId)) {
+//                            sendMessage(toCtx, responseJson);
+//                        }
+//                    });
+//        }
     }
 
     @Override
@@ -150,11 +150,11 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public void FileMsgGroupSend(JSONObject param, ChannelHandlerContext ctx) {
         String fromUserId = (String)param.get("fromUserId");
-        String toGroupId = (String)param.get("toGroupId");
+        Long toGroupId = (Long)param.get("toGroupId");
         String originalFilename = (String)param.get("originalFilename");
         String fileSize = (String)param.get("fileSize");
         String fileUrl = (String)param.get("fileUrl");
-        GroupInfo groupInfo = groupDao.getByGroupId(toGroupId);
+        GroupInfo groupInfo = groupDao.getById(toGroupId);
         if (groupInfo == null) {
             String responseJson = new ResponseJson().error("该群id不存在").toString();
             sendMessage(ctx, responseJson);
@@ -167,13 +167,13 @@ public class ChatServiceImpl implements ChatService {
                     .setData("fileUrl", fileUrl)
                     .setData("type", ChatType.FILE_MSG_GROUP_SENDING)
                     .toString();
-            groupInfo.getMembers().stream()
-                    .forEach(member -> {
-                        ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
-                        if (toCtx != null && !member.getUserId().equals(fromUserId)) {
-                            sendMessage(toCtx, responseJson);
-                        }
-                    });
+//            groupInfo.getMembers().stream() 群发功能
+//                    .forEach(member -> {
+//                        ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
+//                        if (toCtx != null && !member.getUserId().equals(fromUserId)) {
+//                            sendMessage(toCtx, responseJson);
+//                        }
+//                    });
         }
     }
 

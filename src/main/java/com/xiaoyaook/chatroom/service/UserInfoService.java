@@ -7,5 +7,5 @@ import com.xiaoyaook.chatroom.response.ResponseJson;
  */
 public interface UserInfoService {
 
-    ResponseJson getByUserId(String userId);
+    ResponseJson getByUsername(String userId);
 }

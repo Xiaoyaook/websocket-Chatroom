@@ -1,35 +1,28 @@
 package com.xiaoyaook.chatroom.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 import java.util.List;
 
 /**
  * created by xiaoyaook on 18-10-2
  */
 public class UserInfo {
-    private String userId;
+
+    private Long id;
+    private String nickname;
     private String username;
     private String password;
     private String avatarUrl;
-    private List<UserInfo> friendList;
-    private List<GroupInfo> groupList;
+    private String discreption;
+    private String salt;
 
-    public UserInfo() {
-        super();
-    }
+    private Date createBy;
+    private Date modifiedBy;
 
-    public UserInfo(String userId, String username, String password, String avatarUrl) {
-        super();
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.avatarUrl = avatarUrl;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public Long getId() {
+        return id;
     }
     public String getUsername() {
         return username;
@@ -46,24 +39,64 @@ public class UserInfo {
     public String getAvatarUrl() {
         return avatarUrl;
     }
-
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
 
-    public List<UserInfo> getFriendList() {
-        return friendList;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setFriendList(List<UserInfo> friendList) {
-        this.friendList = friendList;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public List<GroupInfo> getGroupList() {
-        return groupList;
+    public String getDiscreption() {
+        return discreption;
     }
 
-    public void setGroupList(List<GroupInfo> groupList) {
-        this.groupList = groupList;
+    public void setDiscreption(String discreption) {
+        this.discreption = discreption;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Date getCreateBy() {
+        return createBy;
+    }
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    public void setCreateBy(Date createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getModifiedBy() {
+        return modifiedBy;
+    }
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    public void setModifiedBy(Date modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", discreption='" + discreption + '\'' +
+                ", salt='" + salt + '\'' +
+                ", createBy=" + createBy +
+                ", modifiedBy=" + modifiedBy +
+                '}';
     }
 }
